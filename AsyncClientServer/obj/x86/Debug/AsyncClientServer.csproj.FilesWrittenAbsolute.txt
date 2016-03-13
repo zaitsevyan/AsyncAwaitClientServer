@@ -1,0 +1,5 @@
+/Users/zaitsevyan/Projects/Home/C#/AsyncClientServer/AsyncClientServer/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/zaitsevyan/Projects/Home/C#/AsyncClientServer/AsyncClientServer/bin/Debug/AsyncClientServer.exe.mdb
+/Users/zaitsevyan/Projects/Home/C#/AsyncClientServer/AsyncClientServer/bin/Debug/AsyncClientServer.exe
+/Users/zaitsevyan/Projects/Home/C#/AsyncClientServer/AsyncClientServer/obj/x86/Debug/AsyncClientServer.exe
+/Users/zaitsevyan/Projects/Home/C#/AsyncClientServer/AsyncClientServer/obj/x86/Debug/AsyncClientServer.exe.mdb

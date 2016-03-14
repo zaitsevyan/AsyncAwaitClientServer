@@ -1,12 +1,10 @@
 ﻿<Properties StartupItem="AsyncClientServer/AsyncClientServer.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Client/Client.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AsyncClientServer/Server.cs">
     <Files>
-      <File FileName="AsyncClientServer/Program.cs" Line="7" Column="25" />
-      <File FileName="AsyncClientServer/EmptyClass.cs" Line="1" Column="1" />
-      <File FileName="AsyncClientServer/Server.cs" Line="32" Column="20" />
-      <File FileName="Client/Program.cs" Line="10" Column="50" />
-      <File FileName="Client/Client.cs" Line="1" Column="1" />
+      <File FileName="Client/Program.cs" Line="13" Column="5" />
+      <File FileName="Client/Client.cs" Line="19" Column="4" />
+      <File FileName="AsyncClientServer/Server.cs" Line="57" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

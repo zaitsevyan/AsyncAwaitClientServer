@@ -13,7 +13,7 @@ namespace AsyncClientServer
 	{
 		public TcpListener Listener;
 		private volatile bool Running;
-		private List<StreamWriter> writers = new List<StreamWriter>();
+		private List<BinaryWriter> writers = new List<BinaryWriter>();
 		public Server (int port)
 		{
 			Listener = new TcpListener (IPAddress.Any, port);
@@ -31,16 +31,18 @@ namespace AsyncClientServer
 
 
 		public async Task ProcessConnection(TcpClient connection) { //Будет выполнятся в отдельном потоке
-			var writer = new StreamWriter(connection.GetStream());
-			writer.AutoFlush = true;
+			var writer = new BinaryWriter(connection.GetStream());
 
 			lock (writers) {
 				writers.Add (writer);
 			}
-			using(var stream = new StreamReader(connection.GetStream())) {
+			using(var stream = new BinaryReader(connection.GetStream())) {
 				while (Running && connection.Connected) {
-					var line = await stream.ReadLineAsync ();
-					ProcessCommand (connection, writer, line);
+					await Task.Factory.StartNew (() => {
+						var count = stream.ReadInt32();
+						var data = stream.ReadBytes (count);
+						ProcessCommand (connection, writer, data);
+					});
 				}
 				connection.Close ();
 			}
@@ -50,15 +52,18 @@ namespace AsyncClientServer
 		}
 
 
-		private void ProcessCommand(TcpClient connection, StreamWriter writer, String line) {
+		private void ProcessCommand(TcpClient connection, BinaryWriter writer, byte[] data) {
 			var info = connection.Client.RemoteEndPoint as IPEndPoint;
+			var line = System.Text.Encoding.UTF8.GetString (data);
 			var response = String.Format ("{1}:{2}: {0}", line, info.Address.ToString(), info.Port);
 			Console.WriteLine (response);
 			lock (writers) {
 				foreach (var w in writers) {
 					if (w != null) {
 						try {
-							w.WriteLineAsync (response);
+							w.Write((Int32)data.Length);
+							w.Write(data);
+							w.Flush();
 						} catch {
 						
 						}
